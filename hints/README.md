@@ -20,9 +20,9 @@ framework's request entry points and wrappers. They compose — read both.
 | Java | [core](java/core/sources-and-sinks.md) | [Spring](java/spring/sources-and-sinks.md) |
 | Go | [core](go/core/sources-and-sinks.md) | [net/http](go/nethttp/sources-and-sinks.md) |
 | PHP | [core](php/core/sources-and-sinks.md) | [Laravel](php/laravel/sources-and-sinks.md) |
-| Ruby | [core](ruby/core/sources-and-sinks.md) | _Rails wanted_ |
+| Ruby | [core](ruby/core/sources-and-sinks.md) | [Rails](ruby/rails/sources-and-sinks.md) |
 
-_7 languages, 13 hint sets (6 with core + one web framework; Ruby core-only so far)._
+_7 languages × (core + one web framework) = 14 hint sets._
 
 ## Wanted (open gaps)
 
@@ -32,10 +32,10 @@ roughly in order of how often they show up in real review:
 - **More frameworks for covered languages:** Python **Flask** / **FastAPI**;
   JavaScript **Next.js** / **NestJS**; Java **Jakarta EE** / **Quarkus**; Go
   **Gin** / **Echo**; PHP **Symfony**; C# **Blazor** / **Minimal APIs**.
-- **Ruby framework:** **Rails** (strong params, `params`, `raw`/`html_safe`,
-  `find_by_sql`, `constantize`, mass assignment) — core is done; Rails is next.
 - **New languages (core first):** **Rust** (+ Axum/Actix), **Kotlin**,
   **TypeScript-specific** notes, **C/C++**, **Scala**.
+- **Second frameworks** for covered languages (see the top of this list) once
+  breadth across languages is satisfied.
 - **Cross-cutting sink families** that recur across stacks and could become their
   own reference: SSRF allow-listing, deserialization gadgets, template-injection
   engines, ORM raw-query escape hatches.
