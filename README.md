@@ -16,7 +16,8 @@ it and start reviewing in seconds instead of re-deriving it.
 1. **Hints** (`hints/<language>/<framework>/`) — curated lists of dangerous
    **sources** (where untrusted data enters) and **sinks** (where it causes harm),
    plus terse review notes. Organized by language and framework so an agent pulls
-   only what's relevant: e.g. `hints/csharp/aspnet/`, `hints/csharp/core/`.
+   only what's relevant: e.g. `hints/csharp/aspnet/`, `hints/csharp/core/`. See
+   [`hints/README.md`](hints/README.md) for the coverage index and open gaps.
 2. **Recon skills** (`skills/`) — generalized and language-specific procedures for
    getting oriented in an unfamiliar repo: detect languages in use, the build
    system, frameworks, entry points, and trust boundaries.
