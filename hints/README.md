@@ -21,8 +21,9 @@ framework's request entry points and wrappers. They compose — read both.
 | Go | [core](go/core/sources-and-sinks.md) | [net/http](go/nethttp/sources-and-sinks.md) |
 | PHP | [core](php/core/sources-and-sinks.md) | [Laravel](php/laravel/sources-and-sinks.md) |
 | Ruby | [core](ruby/core/sources-and-sinks.md) | [Rails](ruby/rails/sources-and-sinks.md) |
+| Rust | [core](rust/core/sources-and-sinks.md) | — _(Axum/Actix wanted)_ |
 
-_7 languages × (core + one web framework) = 14 hint sets._
+_7 languages × (core + one web framework) = 14 hint sets, plus **Rust** core (framework wanted) = 15._
 
 ## Wanted (open gaps)
 
@@ -31,8 +32,9 @@ roughly in order of how often they show up in real review:
 
 - **More frameworks for covered languages:** Python **Flask** / **FastAPI**;
   JavaScript **Next.js** / **NestJS**; Java **Jakarta EE** / **Quarkus**; Go
-  **Gin** / **Echo**; PHP **Symfony**; C# **Blazor** / **Minimal APIs**.
-- **New languages (core first):** **Rust** (+ Axum/Actix), **Kotlin**,
+  **Gin** / **Echo**; PHP **Symfony**; C# **Blazor** / **Minimal APIs**; Rust
+  **Axum** / **Actix**.
+- **New languages (core first):** **Kotlin**,
   **TypeScript-specific** notes, **C/C++**, **Scala**.
 - **Second frameworks** for covered languages (see the top of this list) once
   breadth across languages is satisfied.
