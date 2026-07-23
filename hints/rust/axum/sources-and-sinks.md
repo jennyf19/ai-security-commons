@@ -16,9 +16,9 @@ response shape, so most rows transfer. For stdlib sinks that apply everywhere
 | `Json<T>` (`axum::extract`) | deserialization | Body deserialized via serde; attacker shapes it. Malformed input is rejected (400/422) with no code execution, but validate the decoded value and keep a body limit. |
 | `Form<T>` (`axum::extract`) | http-input | URL-encoded body/query via serde; same trust level as `Query`. |
 | `Multipart` (`axum::extract`) | file | File uploads; never use the client-supplied filename as a path. |
-| `HeaderMap` / `TypedHeader<T>` | http-input | Includes `Host`, `Referer`, `X-Forwarded-*` — all forgeable. |
+| `HeaderMap` / `TypedHeader<T>` | http-input | Request headers — `Host`, `Referer`, `X-Forwarded-*` are all forgeable. (`TypedHeader` lives in `axum-extra`.) |
 | `CookieJar` (`axum-extra`) | http-input | Client-supplied; use `SignedCookieJar` / `PrivateCookieJar` for integrity. |
-| `Bytes` / `String` / `Body` | http-input | Raw body; bounded only by the body limit (see notes) — validate and size-cap. |
+| `Bytes` / `String` | http-input | Whole request body buffered into memory; bounded by `DefaultBodyLimit` (see notes) — still validate and size-cap. |
 | `RawQuery` / `OriginalUri` | http-input | Unparsed query / URI string; fully attacker-controlled. |
 | `WebSocketUpgrade` messages (`extract::ws`) | network | Per-message payloads are untrusted; frame and bound them. |
 
@@ -39,10 +39,11 @@ response shape, so most rows transfer. For stdlib sinks that apply everywhere
   extractor (a `FromRequestParts` that checks the session). A state-changing
   route (`post` / `put` / `delete`) not behind an auth layer/extractor is the
   most common real bug — flag it.
-- **Body limits / DoS**: `DefaultBodyLimit` caps bodies at 2 MiB by default;
-  `DefaultBodyLimit::disable()`, or reading `Bytes` / `Body` without a cap,
-  allows unbounded memory. Keep the default or set `RequestBodyLimitLayer`, and
-  add request timeouts.
+- **Body limits / DoS**: `DefaultBodyLimit` (2 MiB default) bounds only the
+  buffered extractors (`Bytes`, `String`, `Json`, `Form`); `disable()` removes
+  it. Consuming the raw `Body` **stream** (`poll_frame`) bypasses it entirely —
+  cap that with `tower_http`'s `RequestBodyLimitLayer` (global), and add request
+  timeouts.
 - **CSRF**: cookie-session, state-changing routes need CSRF defense — Axum has
   none built in; use a `tower` CSRF layer plus `SameSite` cookies.
 - **Panics → availability**: a panicking handler (`.unwrap()`, indexing,
